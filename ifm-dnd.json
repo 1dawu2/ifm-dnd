@@ -1,0 +1,59 @@
+{
+    "id": "com.fd.djaja.sap.sac.inputpassword",
+    "version": "0.0.2",
+    "name": "inputPassword",
+    "description": "Input Password",
+    "newInstancePrefix": "inputPassword",
+    "icon": "https://1dawu2.github.io/ifm-dnd/icon.png",
+    "vendor": "Ferry Djaja",
+    "eula": "",
+    "license": "",
+    "imports": [
+        "input-controls"
+    ],
+    "webcomponents": [
+        {
+            "kind": "main",
+            "tag": "com-fd-djaja-sap-sac-inputpassword",
+            "url": "https://1dawu2.github.io/ifm-dnd/ifm-dnd.js",
+            "integrity": "",
+            "ignoreIntegrity": true
+        }
+    ],
+    "properties": {
+        "metadata": {
+            "type": "string",
+            "description": "For internal use",
+            "default": ""
+        },
+        "password": {
+            "type": "string",
+            "description": "password",
+            "default": ""
+        }
+    },
+    "methods": {
+        "getPassword": {
+            "returnType": "string",
+            "description": "Get password",
+            "parameters": [],
+            "body": "return this.password;"
+        },
+        "setPassword": {
+            "description": "Set password",
+            "parameters": [
+                {
+                    "name": "value",
+                    "type": "string",
+                    "description": "The new password"
+                }
+            ],
+            "body": "this.password = value;"
+        }
+    },
+    "events": {
+        "onStart": {
+            "description": "onStart events trigger"
+        }
+    }
+}
