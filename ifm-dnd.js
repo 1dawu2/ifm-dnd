@@ -199,6 +199,7 @@
             //### Controller ###
             sap.ui.define([
                 "jquery.sap.global",
+                "sap/ui/core/dnd/DragInfo",
                 "sap/ui/core/dnd/DropInfo",
                 "sap/ui/core/mvc/Controller"
             ], function (jQuery, Controller) {
@@ -247,7 +248,7 @@
                             ui5List.addDragDropConfig(new sap.ui.core.dnd.DragInfo({
                                 sourceAggregation: "items"
                             }));
-                            ui5List.addDragDropConfig(new sap.f.dnd.GridDropInfo({
+                            ui5List.addDragDropConfig(new sap.ui.core.dnd.DropInfo({
                                 targetAggregation: "items",
                                 dropPosition: "Between",
                                 dropLayout: "Vertical",
