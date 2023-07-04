@@ -23,19 +23,14 @@
 					<l:content>
                         <Button
                             id="ifmListBtn"
-                            icon="sap-icon://menu2"
-                            type="Transparent"
+                            class="sapUiTinyMarginBeginEnd"
+                            icon="sap-icon://sort"
+                            type="Default"
                             press="configList">
                         </Button>
-                        <List
-                            showSeparators="All"
-                            id="ifmListDnD"
-                            items="{list>/listItems}"> 
-                            <StandardListItem
-                                description="{list>description}"
-                                icon="{list>iconFile}"
-                                title="{list>id}" />
-                        </List>
+                        <l:content>
+                            <Panel height="100%" expandable="true" expanded="false" headerText="Sort List" id="oPanel"></Panel>
+                        </l:content>
 					</l:content>
 				</l:VerticalLayout>
 			</mvc:View>
@@ -212,10 +207,34 @@
                 "use strict";
 
                 return Controller.extend("ifm.dnd", {
+
+                    onInit: function (oEvent) {
+                        this.oPanel = this.byId("oPanel");
+                    },
+
                     configList: function (oEvent) {
-                        _list = oView.byId("ifmListDnD").getValue();
-                        that._firePropertiesChanged();
-                        console.log(_list);
+                        // _list = oView.byId("ifmListDnD").getValue();
+                        // that._firePropertiesChanged();
+                        // console.log(_list);
+                        var oModelData =
+                            [
+                                { Animal: "Kangaroo", Zoo: "Sydney" },
+                                { Animal: "Tiger", Zoo: "Melbourne" },
+                                { Animal: "Lion", Zoo: "Alaska" }
+                            ];
+                        var oItem = new sap.m.StandardListItem({
+                            title: "{ Animal }",
+                            description: "{ Zoo }"
+                        });
+                        var oList = new sap.m.List({
+                            headerText: " Items",
+                            items: {
+                                path: "/",
+                                template: oItem
+                            }
+                        });
+                        oList.setModel(oModelData, "/");
+                        this.oPanel.addContent(oList);
 
                     },
                     onButtonPress: function (oEvent) {
