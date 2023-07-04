@@ -246,7 +246,7 @@
                                     }
                                 }),
                                 beginButton: new sap.m.Button({
-                                    type: ButtonType.Emphasized,
+                                    type: sap.m.Button.Emphasized,
                                     text: "OK",
                                     press: function () {
                                         this.oDefaultDialog.close();
