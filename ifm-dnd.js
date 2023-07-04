@@ -245,7 +245,7 @@
                         var oList = new sap.m.List({
                             headerText: " Items",
                             items: {
-                                path: "list>/listItems",
+                                path: "/listItems",
                                 template: oItem
                             }
                         });
