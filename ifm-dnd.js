@@ -25,6 +25,7 @@
                             id="ifmListBtn"
                             class="sapUiTinyMarginBeginEnd"
                             icon="sap-icon://sort"
+                            text="Sort List"
                             type="Default"
                             press="configList">
                         </Button>
