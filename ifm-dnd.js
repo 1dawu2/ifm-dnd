@@ -214,10 +214,10 @@
                         // _list = oView.byId("ifmListDnD").getValue();
                         // that._firePropertiesChanged();
                         // console.log(_list);
-                        var modelProduct = new sap.ui.model.json.JSONModel();
-                        modelProduct.setData(
+                        var modelList = new sap.ui.model.json.JSONModel();
+                        modelList.setData(
                             {
-                                "productItems": [
+                                "listItems": [
                                     {
                                         "id": "Website",
                                         "description": "http://www.infomotion.de",
@@ -238,18 +238,18 @@
                         );
                         // sap.ui.getCore().setModel(modelProduct, "products");
                         var oItem = new sap.m.StandardListItem({
-                            id: "{productItems>id}",
-                            description: "{productItems>description}",
-                            iconFile: "{productItems>kconFile}"
+                            id: "{list>id}",
+                            description: "{list>description}",
+                            iconFile: "{list>kconFile}"
                         });
                         var oList = new sap.m.List({
                             headerText: " Items",
                             items: {
-                                path: "productItems/",
+                                path: "list>/listItems",
                                 template: oItem
                             }
                         });
-                        oList.setModel(modelProduct, "productsItems");
+                        oList.setModel(modelList, "list");
                         this.oPanel.addContent(oList);
                     },
 
