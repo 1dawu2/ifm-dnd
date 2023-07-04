@@ -238,9 +238,9 @@
                         );
                         // sap.ui.getCore().setModel(modelProduct, "products");
                         var oItem = new sap.m.StandardListItem({
-                            id: "{list>id}",
-                            description: "{list>description}",
-                            iconFile: "{list>kconFile}"
+                            id: "{id}",
+                            description: "{description}",
+                            iconFile: "{iconFile}"
                         });
                         var oList = new sap.m.List({
                             headerText: " Items",
