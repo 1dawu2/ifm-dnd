@@ -29,7 +29,13 @@
         "list": {
             "type": "ListItem[]",
             "description": "list",
-            "default": "[{id: 'item1', description: 'description 1', iconFile:'sap-icon://shipping-status'}]"
+            "default": [
+                {
+                    "id": "item1",
+                    "description": "description 1",
+                    "iconFile": "sap-icon://shipping-status"
+                }
+            ]
         }
     },
     "methods": {

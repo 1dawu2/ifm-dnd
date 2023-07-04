@@ -21,15 +21,15 @@
 					class="sapUiContentPadding"
 					width="100%">
 					<l:content>
-                        <m:List
+                        <List
                             showSeparators="All"
                             id="ifmListDnD"
                             items="{list>/listItems}"> 
-                            <m:StandardListItem
+                            <StandardListItem
                                 description="{list>description}"
                                 icon="{list>iconFile}"
                                 title="{list>id}" />
-                        </m:List>
+                        </List>
 						<Input
 							id="passwordInput"
 							type="Password"
