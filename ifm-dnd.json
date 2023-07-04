@@ -1,11 +1,11 @@
 {
-    "id": "com.fd.djaja.sap.sac.inputpassword",
-    "version": "0.0.2",
-    "name": "inputPassword",
-    "description": "Input Password",
+    "id": "ifm.dnd",
+    "version": "0.0.1",
+    "name": "IFM Drag&Drop",
+    "description": "IFM Drag&Drop",
     "newInstancePrefix": "inputPassword",
     "icon": "https://1dawu2.github.io/ifm-dnd/icon.png",
-    "vendor": "Ferry Djaja",
+    "vendor": "IFM",
     "eula": "",
     "license": "",
     "imports": [
@@ -14,7 +14,7 @@
     "webcomponents": [
         {
             "kind": "main",
-            "tag": "com-fd-djaja-sap-sac-inputpassword",
+            "tag": "ifm-dnd",
             "url": "https://1dawu2.github.io/ifm-dnd/ifm-dnd.js",
             "integrity": "",
             "ignoreIntegrity": true

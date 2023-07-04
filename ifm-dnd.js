@@ -31,7 +31,7 @@
         </script>        
     `;
 
-    class InputPassword extends HTMLElement {
+    class IFMDnD extends HTMLElement {
 
         constructor() {
             super();
@@ -180,7 +180,7 @@
         }
 
     }
-    customElements.define("com-fd-djaja-sap-sac-inputpassword", InputPassword);
+    customElements.define("ifm-dnd", IFMDnD);
 
     // UTILS
     function loadthis(that) {
