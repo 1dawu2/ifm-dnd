@@ -199,6 +199,7 @@
             //### Controller ###
             sap.ui.define([
                 "jquery.sap.global",
+                "sap/f/Card",
                 "sap/ui/core/dnd/DragInfo",
                 "sap/ui/core/dnd/DropInfo",
                 "sap/ui/core/mvc/Controller"
@@ -272,7 +273,7 @@
                                     ui5List.insertItem(oDragged, iDropPosition);
                                 }
                             }));
-                            var ui5Card = new sap.m.Card({
+                            var ui5Card = new sap.f.Card({
                                 conetent: [ui5List]
                             });
                             this.oDefaultDialog = new sap.m.Dialog({
