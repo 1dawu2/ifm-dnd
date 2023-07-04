@@ -199,6 +199,7 @@
             //### Controller ###
             sap.ui.define([
                 "jquery.sap.global",
+                "sap/ui/core/dnd/DropInfo",
                 "sap/ui/core/mvc/Controller"
             ], function (jQuery, Controller) {
                 "use strict";
@@ -233,20 +234,50 @@
 
                     configList: function (oEvent) {
                         if (!this.oDefaultDialog) {
+                            var ui5List = new sap.m.List({
+                                items: {
+                                    path: "/listItems",
+                                    template: new sap.m.StandardListItem({
+                                        title: "{id}",
+                                        description: "{description}",
+                                        iconFile: "{iconFile}"
+                                    })
+                                }
+                            });
+                            ui5List.addDragDropConfig(new sap.ui.core.dnd.DragInfo({
+                                sourceAggregation: "items"
+                            }));
+                            ui5List.addDragDropConfig(new sap.f.dnd.GridDropInfo({
+                                targetAggregation: "items",
+                                dropPosition: "Between",
+                                dropLayout: "Vertical",
+                                drop: function (oInfo) {
+                                    var oDragged = oInfo.getParameter("draggedControl"),
+                                        oDropped = oInfo.getParameter("droppedControl"),
+                                        sInsertPosition = oInfo.getParameter("dropPosition"),
+                                        iDragPosition = oGrid.indexOfItem(oDragged),
+                                        iDropPosition = oGrid.indexOfItem(oDropped);
+
+                                    ui5List.removeItem(oDragged);
+
+                                    if (iDragPosition < iDropPosition) {
+                                        iDropPosition--;
+                                    };
+
+                                    if (sInsertPosition === "After") {
+                                        iDropPosition++;
+                                    };
+
+                                    ui5List.insertItem(oDragged, iDropPosition);
+                                }
+                            }));
+                            var ui5Card = new sap.m.Card({
+                                conetent: [ui5List]
+                            });
                             this.oDefaultDialog = new sap.m.Dialog({
                                 title: "Sort List Items",
-                                content: new sap.m.List({
-                                    items: {
-                                        path: "/listItems",
-                                        template: new sap.m.StandardListItem({
-                                            title: "{id}",
-                                            description: "{description}",
-                                            iconFile: "{iconFile}"
-                                        })
-                                    }
-                                }),
+                                content: [ui5Card],
                                 beginButton: new sap.m.Button({
-                                    type: sap.m.Button.Emphasized,
                                     text: "OK",
                                     press: function () {
                                         this.oDefaultDialog.close();
