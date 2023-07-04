@@ -275,7 +275,7 @@
                                 }
                             }));
                             var ui5Card = new sap.f.Card({
-                                conetent: [ui5List]
+                                content: [ui5List]
                             });
                             this.oDefaultDialog = new sap.m.Dialog({
                                 title: "Sort List Items",
