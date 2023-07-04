@@ -28,9 +28,7 @@
                             type="Default"
                             press="configList">
                         </Button>
-                        <l:content>
-                            <Panel height="100%" expandable="true" expanded="false" headerText="Sort List" id="oPanel"></Panel>
-                        </l:content>
+                        <Panel height="100%" expandable="true" expanded="false" headerText="Sort List" id="oPanel"></Panel>
 					</l:content>
 				</l:VerticalLayout>
 			</mvc:View>
