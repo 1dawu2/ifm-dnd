@@ -214,27 +214,45 @@
                         // _list = oView.byId("ifmListDnD").getValue();
                         // that._firePropertiesChanged();
                         // console.log(_list);
-                        var oModelData =
-                            [
-                                { Animal: "Kangaroo", Zoo: "Sydney" },
-                                { Animal: "Tiger", Zoo: "Melbourne" },
-                                { Animal: "Lion", Zoo: "Alaska" }
-                            ];
+                        var modelProduct = new sap.ui.model.json.JSONModel();
+                        modelProduct.setData(
+                            {
+                                "productItems": [
+                                    {
+                                        "id": "Website",
+                                        "description": "http://www.infomotion.de",
+                                        "iconFile": "sap-icon://world"
+                                    },
+                                    {
+                                        "id": "Telefon",
+                                        "description": "+49 69 56608 3231",
+                                        "iconFile": "sap-icon://call"
+                                    },
+                                    {
+                                        "id": "Mail",
+                                        "description": "david.wurm@infomotion.de",
+                                        "iconFile": "sap-icon://business-card"
+                                    }
+                                ]
+                            }
+                        );
+                        // sap.ui.getCore().setModel(modelProduct, "products");
                         var oItem = new sap.m.StandardListItem({
-                            title: "{ Animal }",
-                            description: "{ Zoo }"
+                            id: "{productItems>id}",
+                            description: "{productItems>description}",
+                            iconFile: "{productItems>kconFile}"
                         });
                         var oList = new sap.m.List({
                             headerText: " Items",
                             items: {
-                                path: "/",
+                                path: "productItems/",
                                 template: oItem
                             }
                         });
-                        oList.setModel(oModelData, "/");
+                        oList.setModel(modelProduct, "productsItems");
                         this.oPanel.addContent(oList);
-
                     },
+
                     onButtonPress: function (oEvent) {
                         _list = oView.byId("ifmListDnD").getValue();
                         that._firePropertiesChanged();
