@@ -21,6 +21,12 @@
 					class="sapUiContentPadding"
 					width="100%">
 					<l:content>
+                        <m:Button
+                            id="ifmListBtn"
+                            icon="sap-icon://menu2"
+                            type="Transparent"
+                            press="configList">
+                        </m:Button>
                         <List
                             showSeparators="All"
                             id="ifmListDnD"
@@ -30,10 +36,6 @@
                                 icon="{list>iconFile}"
                                 title="{list>id}" />
                         </List>
-						<Input
-							id="passwordInput"
-							type="Password"
-							placeholder="Enter password ..." liveChange="onButtonPress"/>
 					</l:content>
 				</l:VerticalLayout>
 			</mvc:View>
@@ -210,7 +212,7 @@
                 "use strict";
 
                 return Controller.extend("ifm.dnd", {
-                    listConfig: function (oEvent) {
+                    configList: function (oEvent) {
                         _list = oView.byId("ifmListDnD").getValue();
                         that._firePropertiesChanged();
                         console.log(_list);
