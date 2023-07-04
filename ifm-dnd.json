@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "name": "IFM Drag&Drop",
     "description": "IFM Drag&Drop",
-    "newInstancePrefix": "inputPassword",
+    "newInstancePrefix": "IFM",
     "icon": "https://1dawu2.github.io/ifm-dnd/icon.png",
     "vendor": "IFM",
     "eula": "",
@@ -26,29 +26,54 @@
             "description": "For internal use",
             "default": ""
         },
-        "password": {
-            "type": "string",
-            "description": "password",
+        "list": {
+            "type": "ListItem[]",
+            "description": "list",
             "default": ""
         }
     },
     "methods": {
-        "getPassword": {
-            "returnType": "string",
-            "description": "Get password",
+        "getList": {
+            "returnType": "ListItem[]",
+            "description": "Get list",
             "parameters": [],
-            "body": "return this.password;"
+            "body": "return this.list;"
         },
-        "setPassword": {
-            "description": "Set password",
+        "setList": {
+            "description": "Set list",
             "parameters": [
                 {
                     "name": "value",
-                    "type": "string",
-                    "description": "The new password"
+                    "type": "ListItem[]",
+                    "description": "The new list"
                 }
             ],
-            "body": "this.password = value;"
+            "body": "this.list = value;"
+        }
+    },
+    "types": {
+        "ListItem": {
+            "description": "A list item",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "ID of the list item",
+                    "mandatory": true
+                },
+                {
+                    "name": "description",
+                    "type": "string",
+                    "description": "Description of the list item",
+                    "mandatory": false
+                },
+                {
+                    "name": "iconFile",
+                    "type": "string",
+                    "description": "Icon file name of the list item",
+                    "mandatory": false
+                }
+            ]
         }
     },
     "events": {

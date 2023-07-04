@@ -1,7 +1,7 @@
 (function () {
     let _shadowRoot;
     let _id;
-    let _password;
+    let _list;
 
     let tmpl = document.createElement("template");
     tmpl.innerHTML = `
@@ -13,7 +13,7 @@
 
         <script id="oView" name="oView" type="sapui5/xmlview">
             <mvc:View
-			    controllerName="myView.Template"
+			    controllerName="ifm.dnd"
 				xmlns:l="sap.ui.layout"
 				xmlns:mvc="sap.ui.core.mvc"
 				xmlns="sap.m">
@@ -21,6 +21,15 @@
 					class="sapUiContentPadding"
 					width="100%">
 					<l:content>
+                        <m:List
+                            showSeparators="All"
+                            id="ifmListDnD"
+                            items="{list>/listItems}"> 
+                            <m:StandardListItem
+                                description="{list>description}"
+                                icon="{list>iconFile}"
+                                title="{list>id}" />
+                        </m:List>
 						<Input
 							id="passwordInput"
 							type="Password"
@@ -46,7 +55,7 @@
             _shadowRoot.querySelector("#oView").id = _id + "_oView";
 
             this._export_settings = {};
-            this._export_settings.password = "";
+            this._export_settings.list = "";
 
             this.addEventListener("click", event => {
                 console.log('click');
@@ -148,28 +157,28 @@
         }
 
         _firePropertiesChanged() {
-            this.password = "";
+            this.list = "";
             this.dispatchEvent(new CustomEvent("propertiesChanged", {
                 detail: {
                     properties: {
-                        password: this.password
+                        list: this.list
                     }
                 }
             }));
         }
 
         // SETTINGS
-        get password() {
-            return this._export_settings.password;
+        get list() {
+            return this._export_settings.list;
         }
-        set password(value) {
-            value = _password;
-            this._export_settings.password = value;
+        set list(value) {
+            value = _list;
+            this._export_settings.list = value;
         }
 
         static get observedAttributes() {
             return [
-                "password"
+                "list"
             ];
         }
 
@@ -200,14 +209,20 @@
             ], function (jQuery, Controller) {
                 "use strict";
 
-                return Controller.extend("myView.Template", {
-                    onButtonPress: function (oEvent) {
-                        _password = oView.byId("passwordInput").getValue();
+                return Controller.extend("ifm.dnd", {
+                    listConfig: function (oEvent) {
+                        _list = oView.byId("ifmListDnD").getValue();
                         that._firePropertiesChanged();
-                        console.log(_password);
+                        console.log(_list);
+
+                    },
+                    onButtonPress: function (oEvent) {
+                        _list = oView.byId("ifmListDnD").getValue();
+                        that._firePropertiesChanged();
+                        console.log(_list);
 
                         this.settings = {};
-                        this.settings.password = "";
+                        this.settings.list = "";
 
                         that.dispatchEvent(new CustomEvent("onStart", {
                             detail: {
@@ -226,7 +241,7 @@
 
 
             if (that_._designMode) {
-                oView.byId("passwordInput").setEnabled(false);
+                oView.byId("ifmListDnD").setEnabled(false);
             }
         });
     }
