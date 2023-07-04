@@ -28,7 +28,6 @@
                             type="Default"
                             press="configList">
                         </Button>
-                        <Panel height="100%" expandable="true" expanded="false" headerText="Sort List" id="oPanel"></Panel>
 					</l:content>
 				</l:VerticalLayout>
 			</mvc:View>
@@ -207,13 +206,6 @@
                 return Controller.extend("ifm.dnd", {
 
                     onInit: function (oEvent) {
-                        this.oPanel = this.byId("oPanel");
-                    },
-
-                    configList: function (oEvent) {
-                        // _list = oView.byId("ifmListDnD").getValue();
-                        // that._firePropertiesChanged();
-                        // console.log(_list);
                         var modelList = new sap.ui.model.json.JSONModel();
                         modelList.setData(
                             {
@@ -236,21 +228,46 @@
                                 ]
                             }
                         );
-                        // sap.ui.getCore().setModel(modelProduct, "products");
-                        var oItem = new sap.m.StandardListItem({
-                            id: "{id}",
-                            description: "{description}",
-                            iconFile: "{iconFile}"
-                        });
-                        var oList = new sap.m.List({
-                            headerText: " Items",
-                            items: {
-                                path: "/listItems",
-                                template: oItem
-                            }
-                        });
-                        oList.setModel(modelList, "list");
-                        this.oPanel.addContent(oList);
+                        sap.ui.getCore().setModel(modelList);
+                    },
+
+                    configList: function (oEvent) {
+                        if (!this.oDefaultDialog) {
+                            this.oDefaultDialog = new sap.m.Dialog({
+                                title: "Sort List Items",
+                                content: new sap.m.List({
+                                    items: {
+                                        path: "/listItems",
+                                        template: new sap.m.StandardListItem({
+                                            title: "{id}",
+                                            description: "{description}",
+                                            iconFile: "{iconFile}"
+                                        })
+                                    }
+                                }),
+                                beginButton: new sap.m.Button({
+                                    type: ButtonType.Emphasized,
+                                    text: "OK",
+                                    press: function () {
+                                        this.oDefaultDialog.close();
+                                    }.bind(this)
+                                }),
+                                endButton: new sap.m.Button({
+                                    text: "Close",
+                                    press: function () {
+                                        this.oDefaultDialog.close();
+                                    }.bind(this)
+                                })
+                            });
+
+                            // to get access to the controller's model
+                            this.getView().addDependent(this.oDefaultDialog);
+                        }
+
+                        this.oDefaultDialog.open();
+                        // _list = oView.byId("ifmListDnD").getValue();
+                        // that._firePropertiesChanged();
+                        // console.log(_list); 
                     },
 
                     onButtonPress: function (oEvent) {
