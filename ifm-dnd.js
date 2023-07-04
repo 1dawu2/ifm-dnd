@@ -21,12 +21,12 @@
 					class="sapUiContentPadding"
 					width="100%">
 					<l:content>
-                        <m:Button
+                        <Button
                             id="ifmListBtn"
                             icon="sap-icon://menu2"
                             type="Transparent"
                             press="configList">
-                        </m:Button>
+                        </Button>
                         <List
                             showSeparators="All"
                             id="ifmListDnD"
