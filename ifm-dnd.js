@@ -257,7 +257,7 @@
                     },
 
                     configList: function (oEvent) {
-                        if (!oDefaultDialog) {
+                        if (!this.oDefaultDialog) {
                             var modelList = new sap.ui.model.json.JSONModel();
                             modelList.setData(that_.prepareListData(that_.list, false));
                             sap.ui.getCore().setModel(modelList);
@@ -312,19 +312,19 @@
                                 width: "100%",
                                 content: [ui5Card]
                             });
-                            oDefaultDialog = new sap.m.Dialog({
+                            this.oDefaultDialog = new sap.m.Dialog({
                                 title: "Sort List Items",
                                 content: [ui5ScrollContainer],
                                 beginButton: new sap.m.Button({
                                     text: "OK",
                                     press: function () {
                                         that._firePropertiesChanged();
-                                        oDefaultDialog.close();
+                                        this.oDefaultDialog.close();
                                     }.bind(this)
                                 })
                             });
                         };
-                        oDefaultDialog.open();
+                        this.oDefaultDialog.open();
                     }
                 });
             });
