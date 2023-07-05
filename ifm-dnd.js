@@ -194,9 +194,9 @@
         }
 
         _firePropertiesChanged(value) {
-            this.list = value;
+            this._export_settings.list = value;
             console.log("property change");
-            console.log(this.list);
+            console.log(this._export_settings.list);
             this.dispatchEvent(new CustomEvent("propertiesChanged", {
                 detail: {
                     properties: {
