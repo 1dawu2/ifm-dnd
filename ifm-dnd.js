@@ -259,8 +259,8 @@
                                     var oDragged = oInfo.getParameter("draggedControl"),
                                         oDropped = oInfo.getParameter("droppedControl"),
                                         sInsertPosition = oInfo.getParameter("dropPosition"),
-                                        iDragPosition = oGrid.indexOfItem(oDragged),
-                                        iDropPosition = oGrid.indexOfItem(oDropped);
+                                        iDragPosition = ui5List.indexOfItem(oDragged),
+                                        iDropPosition = ui5List.indexOfItem(oDropped);
 
                                     ui5List.removeItem(oDragged);
 
