@@ -193,12 +193,14 @@
             }
         }
 
-        _firePropertiesChanged() {
-            this.list = "";
+        _firePropertiesChanged(value) {
+            this.list = value;
+            console.log("property change");
+            console.log(this.list);
             this.dispatchEvent(new CustomEvent("propertiesChanged", {
                 detail: {
                     properties: {
-                        list: this.list
+                        list: value
                     }
                 }
             }));
@@ -318,7 +320,8 @@
                                 beginButton: new sap.m.Button({
                                     text: "OK",
                                     press: function () {
-                                        that._firePropertiesChanged();
+                                        var oData = sap.ui.getCore().getModel().oData;
+                                        that_.updateList(oData);
                                         this.oDefaultDialog.close();
                                     }.bind(this)
                                 })
