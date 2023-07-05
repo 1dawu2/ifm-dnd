@@ -295,7 +295,7 @@
                             });
 
                             // to get access to the controller's model
-                            that_.getView().addDependent(this.oDefaultDialog);
+                            // that_.getView().addDependent(this.oDefaultDialog);
                         }
 
                         this.oDefaultDialog.open();
