@@ -257,30 +257,9 @@
                     },
 
                     configList: function (oEvent) {
-                        if (!this.oDefaultDialog) {
+                        if (!oDefaultDialog) {
                             var modelList = new sap.ui.model.json.JSONModel();
                             modelList.setData(that_.prepareListData(that_.list, false));
-                            // modelList.setData(
-                            //     {
-                            //         "listItems": [
-                            //             {
-                            //                 "id": "Website",
-                            //                 "description": "http://www.infomotion.de",
-                            //                 "iconFile": "sap-icon://world"
-                            //             },
-                            //             {
-                            //                 "id": "Telefon",
-                            //                 "description": "+49 69 56608 3231",
-                            //                 "iconFile": "sap-icon://call"
-                            //             },
-                            //             {
-                            //                 "id": "Mail",
-                            //                 "description": "david.wurm@infomotion.de",
-                            //                 "iconFile": "sap-icon://business-card"
-                            //             }
-                            //         ]
-                            //     }
-                            // );
                             sap.ui.getCore().setModel(modelList);
 
                             var ui5List = new sap.m.List({
@@ -333,48 +312,19 @@
                                 width: "100%",
                                 content: [ui5Card]
                             });
-                            this.oDefaultDialog = new sap.m.Dialog({
+                            oDefaultDialog = new sap.m.Dialog({
                                 title: "Sort List Items",
                                 content: [ui5ScrollContainer],
                                 beginButton: new sap.m.Button({
                                     text: "OK",
                                     press: function () {
-                                        this.oDefaultDialog.close();
-                                    }.bind(this)
-                                }),
-                                endButton: new sap.m.Button({
-                                    text: "Close",
-                                    press: function () {
-                                        this.oDefaultDialog.close();
+                                        that._firePropertiesChanged();
+                                        oDefaultDialog.close();
                                     }.bind(this)
                                 })
                             });
-
-                            // to get access to the controller's model
-                            // that_.getView().addDependent(this.oDefaultDialog);
-                        } else {
-                            // handle update of list items
-                        }
-
-                        this.oDefaultDialog.open();
-                        // _list = oView.byId("ifmListDnD").getValue();
-                        // that._firePropertiesChanged();
-                        // console.log(_list); 
-                    },
-
-                    onButtonPress: function (oEvent) {
-                        _list = oView.byId("ifmListDnD").getValue();
-                        that._firePropertiesChanged();
-                        console.log(_list);
-
-                        this.settings = {};
-                        this.settings.list = "";
-
-                        that.dispatchEvent(new CustomEvent("onStart", {
-                            detail: {
-                                settings: this.settings
-                            }
-                        }));
+                        };
+                        oDefaultDialog.open();
                     }
                 });
             });
