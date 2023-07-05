@@ -382,7 +382,7 @@
 
 
             if (that_._designMode) {
-                oView.byId("ifmListDnD").setEnabled(false);
+                console.log("Design Mode");
             }
         });
     }
