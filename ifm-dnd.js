@@ -210,33 +210,34 @@
                 return Controller.extend("ifm.dnd", {
 
                     onInit: function (oEvent) {
-                        var modelList = new sap.ui.model.json.JSONModel();
-                        modelList.setData(
-                            {
-                                "listItems": [
-                                    {
-                                        "id": "Website",
-                                        "description": "http://www.infomotion.de",
-                                        "iconFile": "sap-icon://world"
-                                    },
-                                    {
-                                        "id": "Telefon",
-                                        "description": "+49 69 56608 3231",
-                                        "iconFile": "sap-icon://call"
-                                    },
-                                    {
-                                        "id": "Mail",
-                                        "description": "david.wurm@infomotion.de",
-                                        "iconFile": "sap-icon://business-card"
-                                    }
-                                ]
-                            }
-                        );
-                        sap.ui.getCore().setModel(modelList);
                     },
 
                     configList: function (oEvent) {
                         if (!this.oDefaultDialog) {
+                            var modelList = new sap.ui.model.json.JSONModel();
+                            modelList.setData(
+                                {
+                                    "listItems": [
+                                        {
+                                            "id": "Website",
+                                            "description": "http://www.infomotion.de",
+                                            "iconFile": "sap-icon://world"
+                                        },
+                                        {
+                                            "id": "Telefon",
+                                            "description": "+49 69 56608 3231",
+                                            "iconFile": "sap-icon://call"
+                                        },
+                                        {
+                                            "id": "Mail",
+                                            "description": "david.wurm@infomotion.de",
+                                            "iconFile": "sap-icon://business-card"
+                                        }
+                                    ]
+                                }
+                            );
+                            sap.ui.getCore().setModel(modelList);
+
                             var ui5List = new sap.m.List({
                                 items: {
                                     path: "/listItems",
@@ -296,6 +297,8 @@
 
                             // to get access to the controller's model
                             // that_.getView().addDependent(this.oDefaultDialog);
+                        } else {
+                            // handle update of list items
                         }
 
                         this.oDefaultDialog.open();
