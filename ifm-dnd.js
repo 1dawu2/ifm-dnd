@@ -50,7 +50,9 @@
             _shadowRoot.querySelector("#oView").id = _id + "_oView";
 
             this._export_settings = {};
-            this._export_settings.list = "";
+            this._export_settings.list = {};
+
+            loadthis(this);
 
             this.addEventListener("click", event => {
                 console.log('click');
@@ -73,7 +75,7 @@
                     val => sacList.push(val)
                 );
                 this._firePropertiesChanged(sacList);
-            }
+            };
         }
 
         prepareListData(listItems, isListUpdate) {
@@ -86,7 +88,7 @@
                 if (isListUpdate === true) {
                     this.updateList(sacList["listItems"]);
                 };
-            }
+            };
 
             console.log("prepared list");
             console.log(sacList);
@@ -185,7 +187,7 @@
         }
 
         onCustomWidgetAfterUpdate(changedProperties) {
-            loadthis(this, changedProperties);
+            // loadthis(this);
         }
 
         _firePropertiesChanged() {
@@ -224,10 +226,10 @@
     customElements.define("ifm-dnd", IFMDnD);
 
     // UTILS
-    function loadthis(that, changedProperties) {
+    function loadthis(that) {
         var that_ = that;
         console.log("properties start loadthis");
-        console.log(changedProperties);
+        // console.log(changedProperties);
 
         let content = document.createElement('div');
         content.slot = "content";
