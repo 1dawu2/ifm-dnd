@@ -278,9 +278,14 @@
                             var ui5Card = new sap.f.Card({
                                 content: [ui5List]
                             });
+                            var ui5ScrollContainer = new sap.m.ui5ScrollContainer({
+                                height: "400px",
+                                width: "100%",
+                                content: [ui5Card]
+                            });
                             this.oDefaultDialog = new sap.m.Dialog({
                                 title: "Sort List Items",
-                                content: [ui5Card],
+                                content: [ui5ScrollContainer],
                                 beginButton: new sap.m.Button({
                                     text: "OK",
                                     press: function () {
