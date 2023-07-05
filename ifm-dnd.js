@@ -57,6 +57,43 @@
             });
         }
 
+        // CONTROL FLOW
+        retrieveListData(listItems, modelIdentifier, fromIndex, toIndex) {
+            var element = listItems[modelIdentifier][fromIndex];
+            listItems[modelIdentifier].splice(fromIndex, 1);
+            listItems[modelIdentifier].splice(toIndex, 0, element);
+        }
+
+        updateList(oData) {
+            console.log("oData update");
+            console.log(oData);
+            var sacList = [];
+            if (typeof oData != 'undefined' && oData) {
+                Object.values(oData).forEach(
+                    val => sacList.push(val)
+                );
+                this._firePropertiesChanged(sacList);
+            }
+        }
+
+        prepareListData(listItems, isListUpdate) {
+            var sacList = { "listItems": [] };
+
+            if (typeof listItems != 'undefined' && listItems) {
+                Object.values(listItems).forEach(
+                    val => sacList["listItems"].push(val)
+                );
+                if (isListUpdate === true) {
+                    this.updateList(sacList["listItems"]);
+                };
+            }
+
+            console.log("prepared list");
+            console.log(sacList);
+
+            return sacList
+        }
+
         connectedCallback() {
             try {
                 if (window.commonApp) {
@@ -148,7 +185,7 @@
         }
 
         onCustomWidgetAfterUpdate(changedProperties) {
-            loadthis(this);
+            loadthis(this, changedProperties);
         }
 
         _firePropertiesChanged() {
@@ -187,8 +224,10 @@
     customElements.define("ifm-dnd", IFMDnD);
 
     // UTILS
-    function loadthis(that) {
+    function loadthis(that, changedProperties) {
         var that_ = that;
+        console.log("properties start loadthis");
+        console.log(changedProperties);
 
         let content = document.createElement('div');
         content.slot = "content";
@@ -215,27 +254,28 @@
                     configList: function (oEvent) {
                         if (!this.oDefaultDialog) {
                             var modelList = new sap.ui.model.json.JSONModel();
-                            modelList.setData(
-                                {
-                                    "listItems": [
-                                        {
-                                            "id": "Website",
-                                            "description": "http://www.infomotion.de",
-                                            "iconFile": "sap-icon://world"
-                                        },
-                                        {
-                                            "id": "Telefon",
-                                            "description": "+49 69 56608 3231",
-                                            "iconFile": "sap-icon://call"
-                                        },
-                                        {
-                                            "id": "Mail",
-                                            "description": "david.wurm@infomotion.de",
-                                            "iconFile": "sap-icon://business-card"
-                                        }
-                                    ]
-                                }
-                            );
+                            modelList.setData(that_.prepareListData(that_.list, false));
+                            // modelList.setData(
+                            //     {
+                            //         "listItems": [
+                            //             {
+                            //                 "id": "Website",
+                            //                 "description": "http://www.infomotion.de",
+                            //                 "iconFile": "sap-icon://world"
+                            //             },
+                            //             {
+                            //                 "id": "Telefon",
+                            //                 "description": "+49 69 56608 3231",
+                            //                 "iconFile": "sap-icon://call"
+                            //             },
+                            //             {
+                            //                 "id": "Mail",
+                            //                 "description": "david.wurm@infomotion.de",
+                            //                 "iconFile": "sap-icon://business-card"
+                            //             }
+                            //         ]
+                            //     }
+                            // );
                             sap.ui.getCore().setModel(modelList);
 
                             var ui5List = new sap.m.List({
@@ -271,6 +311,11 @@
                                     if (sInsertPosition === "After") {
                                         iDropPosition++;
                                     };
+
+                                    var oData = sap.ui.getCore().getModel().oData;
+
+                                    that_.retrieveListData(oData, "listItems", iDragPosition, iDropPosition);
+                                    that_.updateList(oData);
 
                                     ui5List.insertItem(oDragged, iDropPosition);
                                 }
