@@ -278,7 +278,7 @@
                             var ui5Card = new sap.f.Card({
                                 content: [ui5List]
                             });
-                            var ui5ScrollContainer = new sap.m.ui5ScrollContainer({
+                            var ui5ScrollContainer = new sap.m.ScrollContainer({
                                 height: "400px",
                                 width: "100%",
                                 content: [ui5Card]
