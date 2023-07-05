@@ -244,7 +244,7 @@
                                     template: new sap.m.StandardListItem({
                                         title: "{id}",
                                         description: "{description}",
-                                        iconFile: "{iconFile}"
+                                        icon: "{iconFile}"
                                     })
                                 }
                             });
