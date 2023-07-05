@@ -188,6 +188,9 @@
 
         onCustomWidgetAfterUpdate(changedProperties) {
             // loadthis(this);
+            if ("list" in changedProperties) {
+                this._export_settings.list = changedProperties["list"];
+            }
         }
 
         _firePropertiesChanged() {
