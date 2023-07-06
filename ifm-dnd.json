@@ -16,8 +16,8 @@
             "kind": "main",
             "tag": "ifm-dnd",
             "url": "https://1dawu2.github.io/ifm-dnd/ifm-dnd.js",
-            "integrity": "",
-            "ignoreIntegrity": true
+            "integrity": "sha384-2LDjBTrg2pXRLv0bpPBMb/V1HflDRh5GqF4uCvZagiyJD7G0Unstv8c8c6pHJP0m",
+            "ignoreIntegrity": false
         }
     ],
     "properties": {
