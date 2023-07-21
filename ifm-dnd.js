@@ -259,74 +259,74 @@
                     },
 
                     configList: function (oEvent) {
-                        if (!this.oDefaultDialog) {
-                            var modelList = new sap.ui.model.json.JSONModel();
-                            modelList.setData(that_.prepareListData(that_.list, false));
-                            sap.ui.getCore().setModel(modelList);
+                        // if (!this.oDefaultDialog) {
+                        var modelList = new sap.ui.model.json.JSONModel();
+                        modelList.setData(that_.prepareListData(that_.list, false));
+                        sap.ui.getCore().setModel(modelList);
 
-                            var ui5List = new sap.m.List({
-                                items: {
-                                    path: "/listItems",
-                                    template: new sap.m.StandardListItem({
-                                        title: "{id}",
-                                        description: "{description}",
-                                        icon: "{iconFile}"
-                                    })
-                                }
-                            });
-                            ui5List.addDragDropConfig(new sap.ui.core.dnd.DragInfo({
-                                sourceAggregation: "items"
-                            }));
-                            ui5List.addDragDropConfig(new sap.ui.core.dnd.DropInfo({
-                                targetAggregation: "items",
-                                dropPosition: "Between",
-                                dropLayout: "Vertical",
-                                drop: function (oInfo) {
-                                    var oDragged = oInfo.getParameter("draggedControl"),
-                                        oDropped = oInfo.getParameter("droppedControl"),
-                                        sInsertPosition = oInfo.getParameter("dropPosition"),
-                                        iDragPosition = ui5List.indexOfItem(oDragged),
-                                        iDropPosition = ui5List.indexOfItem(oDropped);
-
-                                    ui5List.removeItem(oDragged);
-
-                                    if (iDragPosition < iDropPosition) {
-                                        iDropPosition--;
-                                    };
-
-                                    if (sInsertPosition === "After") {
-                                        iDropPosition++;
-                                    };
-
-                                    var oData = sap.ui.getCore().getModel().oData;
-
-                                    that_.retrieveListData(oData, "listItems", iDragPosition, iDropPosition);
-                                    that_.updateList(oData);
-
-                                    ui5List.insertItem(oDragged, iDropPosition);
-                                }
-                            }));
-                            var ui5Card = new sap.f.Card({
-                                content: [ui5List]
-                            });
-                            var ui5ScrollContainer = new sap.m.ScrollContainer({
-                                height: "400px",
-                                width: "100%",
-                                content: [ui5Card]
-                            });
-                            this.oDefaultDialog = new sap.m.Dialog({
-                                title: "Sort List Items",
-                                content: [ui5ScrollContainer],
-                                beginButton: new sap.m.Button({
-                                    text: "OK",
-                                    press: function () {
-                                        var oData = sap.ui.getCore().getModel().oData;
-                                        that_.updateList(oData);
-                                        this.oDefaultDialog.close();
-                                    }.bind(this)
+                        var ui5List = new sap.m.List({
+                            items: {
+                                path: "/listItems",
+                                template: new sap.m.StandardListItem({
+                                    title: "{id}",
+                                    description: "{description}",
+                                    icon: "{iconFile}"
                                 })
-                            });
-                        };
+                            }
+                        });
+                        ui5List.addDragDropConfig(new sap.ui.core.dnd.DragInfo({
+                            sourceAggregation: "items"
+                        }));
+                        ui5List.addDragDropConfig(new sap.ui.core.dnd.DropInfo({
+                            targetAggregation: "items",
+                            dropPosition: "Between",
+                            dropLayout: "Vertical",
+                            drop: function (oInfo) {
+                                var oDragged = oInfo.getParameter("draggedControl"),
+                                    oDropped = oInfo.getParameter("droppedControl"),
+                                    sInsertPosition = oInfo.getParameter("dropPosition"),
+                                    iDragPosition = ui5List.indexOfItem(oDragged),
+                                    iDropPosition = ui5List.indexOfItem(oDropped);
+
+                                ui5List.removeItem(oDragged);
+
+                                if (iDragPosition < iDropPosition) {
+                                    iDropPosition--;
+                                };
+
+                                if (sInsertPosition === "After") {
+                                    iDropPosition++;
+                                };
+
+                                var oData = sap.ui.getCore().getModel().oData;
+
+                                that_.retrieveListData(oData, "listItems", iDragPosition, iDropPosition);
+                                that_.updateList(oData);
+
+                                ui5List.insertItem(oDragged, iDropPosition);
+                            }
+                        }));
+                        var ui5Card = new sap.f.Card({
+                            content: [ui5List]
+                        });
+                        var ui5ScrollContainer = new sap.m.ScrollContainer({
+                            height: "400px",
+                            width: "100%",
+                            content: [ui5Card]
+                        });
+                        this.oDefaultDialog = new sap.m.Dialog({
+                            title: "Sort List Items",
+                            content: [ui5ScrollContainer],
+                            beginButton: new sap.m.Button({
+                                text: "OK",
+                                press: function () {
+                                    var oData = sap.ui.getCore().getModel().oData;
+                                    that_.updateList(oData);
+                                    this.oDefaultDialog.close();
+                                }.bind(this)
+                            })
+                        });
+                        // };
                         this.oDefaultDialog.open();
                     }
                 });
